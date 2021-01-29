@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Challenge_Pokemon</string>
+    <string name="app_name">Challenge Pokemon - Pedro Moura</string>
+
+    <string name="btn_details">Detalhes</string>
 </resources>
