@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.challenge_pokemon.PokemonViewModel
 import br.com.challenge_pokemon.adapter.PokemonStatsListAdapter
 import br.com.challenge_pokemon.databinding.FragmentPokemonDetailsBinding
+import com.squareup.picasso.Picasso
 
 class PokemonDetailsFragment : Fragment() {
 
@@ -38,6 +39,14 @@ class PokemonDetailsFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setUpView()
+        setUpListeners()
+        initViewModel()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
@@ -50,6 +59,18 @@ class PokemonDetailsFragment : Fragment() {
     private fun setUpView() {
         mListRecyclerView = binding?.recyclerView
 
+        val imageUri = viewModel.pokemonParams?.photo
+
+        Picasso.with(activity)
+                .load(imageUri)
+                .fit()
+                .centerCrop()
+                //.placeholder(R.drawable.user_placeholder)
+                //.error(R.drawable.user_placeholder_error)
+                .into(binding?.imgPokemon);
+
+        binding?.namePokemon?.text = viewModel.pokemonParams?.name
+
         var layoutManager = GridLayoutManager(activity, 2)
         mListRecyclerView?.layoutManager = layoutManager
     }
@@ -59,15 +80,37 @@ class PokemonDetailsFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        var stats: MutableList<Int>? = null
+        var stats: MutableList<Int> = mutableListOf<Int>()
 
         for (i in 0 until 6) {
-            
+            if (i == 0) {
+                stats.add(viewModel.pokemonParams?.life!!)
+            }
+
+            if (i == 1) {
+                stats.add(viewModel.pokemonParams?.velocity!!)
+            }
+
+            if (i == 2) {
+                stats.add(viewModel.pokemonParams?.attack!!)
+            }
+
+            if (i == 3) {
+                stats.add(viewModel.pokemonParams?.defense!!)
+            }
+
+            if (i == 4) {
+                stats.add(viewModel.pokemonParams?.defense_special!!)
+            }
+
+            if (i == 5) {
+                stats.add(viewModel.pokemonParams?.attack_special!!)
+            }
         }
 
-        viewModel.pokemonParams
-
-        mListRecyclerView?.adapter = PokemonStatsListAdapter()
+        if (stats != null) {
+            mListRecyclerView?.adapter = PokemonStatsListAdapter(stats!!)
+        }
     }
 
     //endregion

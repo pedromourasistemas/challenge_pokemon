@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.challenge_pokemon.R
 
-class PokemonStatsListAdapter(private val stats: List<Int>) : RecyclerView.Adapter<PokemonStatsListAdapter.BookHolder>() {
+class PokemonStatsListAdapter(private val stats: MutableList<Int>) : RecyclerView.Adapter<PokemonStatsListAdapter.BookHolder>() {
 
     override fun onBindViewHolder(holder: BookHolder, position: Int) {
         val product: Int = stats[position]
@@ -38,8 +38,31 @@ class PokemonStatsListAdapter(private val stats: List<Int>) : RecyclerView.Adapt
         }
 
         fun bind(stats: Int) {
-            //id?.text = book.id
-            //title?.text = book.title
+            if (position == 0) {
+                stat?.text = "Vida"
+            }
+
+            if (position == 1) {
+                stat?.text = "Velocidade"
+            }
+
+            if (position == 2) {
+                stat?.text = "Ataque"
+            }
+
+            if (position == 3) {
+                stat?.text = "Defesa"
+            }
+
+            if (position == 4) {
+                stat?.text = "Defesa Especial"
+            }
+
+            if (position == 5) {
+                stat?.text = "Ataque Especial"
+            }
+
+            value?.text = stats.toString()
         }
     }
 }

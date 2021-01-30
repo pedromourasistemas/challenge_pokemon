@@ -44,27 +44,27 @@ class PokemonViewModel(application: Application) : AndroidViewModel(application)
                     var velocity: Int? = null
 
                     pokemonResp?.stats?.forEach {
-                        if(it.stat?.name.equals("hp")) {
+                        if (it.stat?.name.equals("hp")) {
                             life = it.base_stat
                         }
 
-                        if(it.stat?.name.equals("attack")) {
+                        if (it.stat?.name.equals("attack")) {
                             attack = it.base_stat
                         }
 
-                        if(it.stat?.name.equals("defense")) {
+                        if (it.stat?.name.equals("defense")) {
                             defense = it.base_stat
                         }
 
-                        if(it.stat?.name.equals("special-attack")) {
+                        if (it.stat?.name.equals("special-attack")) {
                             special_attack = it.base_stat
                         }
 
-                        if(it.stat?.name.equals("special-defense")) {
+                        if (it.stat?.name.equals("special-defense")) {
                             special_defense = it.base_stat
                         }
 
-                        if(it.stat?.name.equals("speed")) {
+                        if (it.stat?.name.equals("speed")) {
                             velocity = it.base_stat
                         }
                     }
